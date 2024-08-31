@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corazón con Letras M y L</title>
+    <style>
+        body {
+            background-color: lightblue;
+            display: flex;
+            flex-direction: column; /* Alinear elementos en columna */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #message {
+            margin-bottom: 20px; /* Espacio entre el mensaje y el canvas */
+            font-size: 24px;
+            font-weight: bold;
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mensaje de texto -->
+    <div id="message">¡Feliz cumpleaños mi niña hermosa, te quiero muchisimo. Te adoro y eres mi odontologa y persona favorita !</div>
+
+    <!-- Canvas para el corazón -->
+    <canvas id="heartCanvas" width="800" height="800"></canvas>
+
+    <script>
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Función para dibujar un corazón pequeño
+        function drawSmallHeart(x, y) {
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(x - 10, y - 10, x - 10, y + 20, x, y + 20);
+            ctx.bezierCurveTo(x + 10, y + 20, x + 10, y - 10, x, y);
+            ctx.fill();
+        }
+
+        // Función para dibujar un corazón grande con forma perfecta
+        function drawBigHeart() {
+            ctx.fillStyle = 'pink';
+            ctx.beginPath();
+            ctx.moveTo(400, 550); // Punto inferior del corazón
+            ctx.bezierCurveTo(150, 300, 150, 50, 400, 150); // Lado izquierdo del corazón
+            ctx.bezierCurveTo(650, 50, 650, 300, 400, 550); // Lado derecho del corazón
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // Dibujar el corazón grande
+        drawBigHeart();
+
+        // Dibujar letras M y L dentro del corazón
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 150px Times New Roman';
+        ctx.fillText('M', 250, 300); // Ajustar posición de la letra M
+        ctx.fillText('L', 450, 300); // Ajustar posición de la letra L
+
+        // Dibujar corazones pequeños alrededor
+        const smallHeartPositions = [
+            {x: 100, y: 100}, {x: 700, y: 100}, {x: 50, y: 400}, 
+            {x: 750, y: 400}, {x: 150, y: 700}, {x: 650, y: 700}
+        ];
+
+        smallHeartPositions.forEach(pos => {
+            drawSmallHeart(pos.x, pos.y);
+        });
+
+        // Función para cargar y dibujar una imagen en una posición específica
+        function drawImage(url, x, y, width, height) {
+            const img = new Image();
+            img.src = url;
+            img.onload = () => {
+                ctx.drawImage(img, x, y, width, height);
+            };
+        }
+
+        // Cargar y dibujar las imágenes dentro del corazón
+        drawImage('https://photos.google.com/share/AF1QipPRrgE71178IczHenj7p4ntFyla4NwiLDcy7XfztStlEXfZ0-wlYC34GY6Fyr_Ckg/photo/AF1QipN0f_pdaHaQsGjvAPG07GU8ITZDRjOBHZy1tm4R?key=X3Ffb2xtcTZYc3ZtdDI0SHExbTA4Zm5jVHgwUHF3', 280, 350, 100, 100); // Ajusta la posición y tamaño según sea necesario
+        drawImage('https://photos.fife.usercontent.google.com/pw/AP1GczPef1gHPV6oiGdOSQzztiLhGPXZU8ycVatpUbAQmb6rt53YFAFFv3jSog=w737-h553-s-no-gm?authuser=0', 420, 350, 100, 100); // Ajusta la posición y tamaño según sea necesario
+
+        // Mostrar el mensaje en la consola (opcional)
+        console.log("¡Feliz cumpleaños mi niña hermosa, te quiero muchisimo ");
+    </script>
+</body>
+</html>
